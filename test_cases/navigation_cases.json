@@ -1,0 +1,43 @@
+[
+  {
+    "id": "school_then_company",
+    "input": "我先送孩子上学，然后去公司",
+    "expect": {
+      "destination.name": "公司"
+    }
+  },
+  {
+    "id": "coffee_on_way",
+    "input": "去公司路上找个咖啡店，别太绕",
+    "expect": {
+      "destination.name": "公司",
+      "constraints.poi_along_route": true,
+      "constraints.max_detour_minutes": 8
+    }
+  },
+  {
+    "id": "fuel_on_way_home",
+    "input": "回家路上加个油",
+    "expect": {
+      "destination.name": "家",
+      "constraints.poi_along_route": true
+    }
+  },
+  {
+    "id": "train_deadline",
+    "input": "我 8 点半火车，现在出发来得及吗？",
+    "expect": {
+      "destination.name": "上海虹桥站",
+      "constraints.arrive_before": "08:30",
+      "need_user_confirm": false
+    }
+  },
+  {
+    "id": "avoid_congestion",
+    "input": "这条路太堵了，换一条",
+    "expect": {
+      "constraints.avoid_congestion": true,
+      "need_user_confirm": false
+    }
+  }
+]

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI + 高德导航助手 MVP</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <h1>AI + 高德导航助手 MVP</h1>
+            <p id="contextLine">加载 Mock 用户上下文中...</p>
+          </div>
+          <span class="status" id="keyStatus">Key 检测中</span>
+        </header>
+
+        <form class="composer" id="plannerForm">
+          <input id="userInput" name="userInput" autocomplete="off" value="我先送孩子上学，然后去公司" />
+          <button type="submit">规划</button>
+          <button type="button" class="secondary-button" id="shareButton">复制测评链接</button>
+        </form>
+
+        <div class="quick-cases" id="quickCases"></div>
+
+        <section class="overview">
+          <div>
+            <strong>MVP 构成</strong>
+            <span>GPT 解析复杂出行意图，生成结构化导航任务；高德能力负责地点、POI、路线与地图呈现。</span>
+          </div>
+          <div class="flow">
+            <span>自然语言</span>
+            <span>GPT JSON</span>
+            <span>高德工具</span>
+            <span>路线卡片</span>
+            <span>地图算路</span>
+          </div>
+          <div class="mode-note">
+            当前支持 Web Service API + JS API 稳定链路，并预留 Skill/MCP Adapter 用于验证 Agent 化接入方案。
+          </div>
+        </section>
+
+        <section class="result-grid">
+          <article class="panel json-panel">
+            <div class="panel-title">GPT 结构化导航任务 JSON</div>
+            <pre id="taskJson">{}</pre>
+          </article>
+          <article class="panel routes-panel">
+            <div class="panel-title">推荐路线卡片</div>
+            <div id="routes"></div>
+          </article>
+        </section>
+      </section>
+
+      <aside class="side">
+        <section class="map-wrap">
+          <div id="map"></div>
+          <canvas id="mockMap" width="720" height="420"></canvas>
+        </section>
+        <section class="panel logs-panel">
+          <div class="panel-title">高德工具调用日志</div>
+          <div id="logs"></div>
+        </section>
+      </aside>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

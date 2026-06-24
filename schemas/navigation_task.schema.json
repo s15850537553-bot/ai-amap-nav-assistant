@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NavigationTask",
+  "type": "object",
+  "required": ["task_type", "origin", "destination", "waypoints", "constraints", "need_user_confirm", "clarification"],
+  "properties": {
+    "task_type": { "const": "navigation_planning" },
+    "origin": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "enum": ["current_location", "memory_place", "poi", "address"] },
+        "name": { "type": "string" }
+      }
+    },
+    "destination": {
+      "type": "object",
+      "required": ["type", "name"],
+      "properties": {
+        "type": { "enum": ["memory_place", "poi", "address"] },
+        "name": { "type": "string" }
+      }
+    },
+    "waypoints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "name"],
+        "properties": {
+          "type": { "enum": ["memory_place", "poi", "address"] },
+          "name": { "type": "string" },
+          "category": { "type": "string" }
+        }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "required": ["arrive_before", "avoid_congestion", "max_detour_minutes", "prefer_less_fee", "poi_along_route"],
+      "properties": {
+        "arrive_before": { "type": ["string", "null"], "pattern": "^\\d{2}:\\d{2}$" },
+        "avoid_congestion": { "type": "boolean" },
+        "max_detour_minutes": { "type": ["integer", "null"], "minimum": 0 },
+        "prefer_less_fee": { "type": "boolean" },
+        "poi_along_route": { "type": "boolean" }
+      }
+    },
+    "need_user_confirm": { "type": "boolean" },
+    "clarification": { "type": ["string", "null"] }
+  }
+}
