@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: ai-amap-nav-assistant
+    runtime: python
+    plan: free
+    buildCommand: ""
+    startCommand: "python -m backend.api_server"
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: AMAP_ADAPTER
+        value: skill
+      - key: OPENAI_MODEL
+        value: gpt-4.1-mini
+      - key: AMAP_WEB_SERVICE_KEY
+        sync: false
+      - key: AMAP_WEB_SERVICE_PRIVATE_KEY
+        sync: false
+      - key: AMAP_JS_API_KEY
+        sync: false
+      - key: AMAP_SECURITY_JS_CODE
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
