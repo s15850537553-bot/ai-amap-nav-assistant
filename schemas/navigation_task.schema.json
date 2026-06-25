@@ -5,6 +5,7 @@
   "required": ["task_type", "origin", "destination", "waypoints", "constraints", "need_user_confirm", "clarification"],
   "properties": {
     "task_type": { "const": "navigation_planning" },
+    "scenario_id": { "type": "string" },
     "origin": {
       "type": "object",
       "required": ["type"],
@@ -45,6 +46,18 @@
       }
     },
     "need_user_confirm": { "type": "boolean" },
-    "clarification": { "type": ["string", "null"] }
+    "clarification": { "type": ["string", "null"] },
+    "execution_plan": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "external_actions": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "decision_points": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
   }
 }

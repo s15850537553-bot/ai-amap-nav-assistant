@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AI + 高德导航助手 MVP</title>
+    <title>Carmind导航验证demo</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
@@ -11,7 +11,11 @@
       <section class="workspace">
         <header class="topbar">
           <div>
-            <h1>AI + 高德导航助手 MVP</h1>
+            <h1>Carmind导航验证demo</h1>
+            <div class="product-meta">
+              <span id="versionLine">版本：加载中</span>
+              <span>作者：阿晓</span>
+            </div>
             <p id="contextLine">加载 Mock 用户上下文中...</p>
           </div>
           <span class="status" id="keyStatus">Key 检测中</span>
@@ -40,6 +44,24 @@
           <div class="mode-note">
             当前支持 Web Service API + JS API 稳定链路，并预留 Skill/MCP Adapter 用于验证 Agent 化接入方案。
           </div>
+        </section>
+
+        <section class="panel reply-panel">
+          <div class="panel-title">AI 规划反馈</div>
+          <div id="plannerReply" class="planner-reply">等待用户输入后生成规划反馈。</div>
+        </section>
+
+        <section class="panel itinerary-panel">
+          <div class="panel-title">多段行程定时触发验证</div>
+          <div class="itinerary-controls">
+            <button type="button" id="startItineraryButton">启动多段行程</button>
+            <button type="button" class="secondary-button" id="onboardButton">模拟用户上车</button>
+            <button type="button" class="secondary-button" id="arrivedButton">模拟到达当前点</button>
+          </div>
+          <div id="itineraryStatus" class="itinerary-status">等待启动多段行程。</div>
+          <div class="mode-note">验证点：基于当前输入生成完整多段行程；后台定时检查触发条件，用户上车且上一段完成时，自动推荐并生成下一段路线。</div>
+          <div id="itinerarySegments" class="segments"></div>
+          <div id="itineraryEvents" class="event-stream"></div>
         </section>
 
         <section class="result-grid">

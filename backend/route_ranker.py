@@ -11,8 +11,12 @@ def rank_routes(routes: list[dict], task: dict, context: dict) -> list[dict]:
         km = round(route["distance_m"] / 1000, 1)
         score = minutes
         reasons = [f"预计 {minutes} 分钟，约 {km} 公里"]
-        if route.get("waypoints"):
-            reasons.append("已串联 " + "、".join(p["name"] for p in route["waypoints"]))
+        resolved_waypoints = [p for p in route.get("waypoints", []) if p.get("location")]
+        unresolved_waypoints = [p for p in route.get("waypoints", []) if not p.get("location")]
+        if resolved_waypoints:
+            reasons.append("已串联 " + "、".join(p["name"] for p in resolved_waypoints))
+        if unresolved_waypoints:
+            reasons.append("待确认沿途点 " + "、".join(p["name"] for p in unresolved_waypoints))
         if constraints.get("avoid_congestion"):
             score -= 6 if route["strategy"] == 32 else 0
             reasons.append("优先避开拥堵路段")

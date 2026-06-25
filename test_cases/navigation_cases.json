@@ -1,43 +1,91 @@
 [
   {
     "id": "school_then_company",
-    "input": "我先送孩子上学，然后去公司",
+    "input": "我要先去送孩子上学，然后再去上班",
     "expect": {
+      "scenario_id": "school_then_work",
       "destination.name": "公司"
     }
   },
   {
-    "id": "coffee_on_way",
-    "input": "去公司路上找个咖啡店，别太绕",
+    "id": "delivery_after_arrival",
+    "input": "我现在回家，同时要买份外卖送到家，送到家的时刻要晚于我到家的时间",
     "expect": {
-      "destination.name": "公司",
-      "constraints.poi_along_route": true,
-      "constraints.max_detour_minutes": 8
-    }
+      "scenario_id": "delivery_after_arrival",
+      "destination.name": "家"
+    },
+    "min_external_actions": 1,
+    "min_execution_plan": 1
   },
   {
     "id": "fuel_on_way_home",
-    "input": "回家路上加个油",
+    "input": "我现在回家，顺路去加个油",
     "expect": {
+      "scenario_id": "fuel_on_way_home",
       "destination.name": "家",
       "constraints.poi_along_route": true
-    }
+    },
+    "min_external_actions": 1
   },
   {
-    "id": "train_deadline",
-    "input": "我 8 点半火车，现在出发来得及吗？",
+    "id": "tour_food_along_route",
+    "input": "去公司路上推荐一个旅游景点和一家美食餐厅，别太绕",
     "expect": {
-      "destination.name": "上海虹桥站",
-      "constraints.arrive_before": "08:30",
-      "need_user_confirm": false
-    }
+      "scenario_id": "poi_along_route",
+      "destination.name": "公司",
+      "constraints.poi_along_route": true
+    },
+    "min_external_actions": 2,
+    "min_recommendations": 2
   },
   {
-    "id": "avoid_congestion",
-    "input": "这条路太堵了，换一条",
+    "id": "low_soc_charging_plan",
+    "input": "我现在回家，电量好像不太够，帮我安排一下",
     "expect": {
-      "constraints.avoid_congestion": true,
-      "need_user_confirm": false
-    }
+      "scenario_id": "low_soc_charging_plan",
+      "destination.name": "家",
+      "constraints.poi_along_route": true
+    },
+    "min_external_actions": 2
+  },
+  {
+    "id": "pickup_point_recommendation",
+    "input": "我朋友说在万达地铁口等我，我让他在哪里等我比较好",
+    "expect": {
+      "scenario_id": "pickup_point_recommendation",
+      "destination.name": "万达地铁口"
+    },
+    "min_external_actions": 1
+  },
+  {
+    "id": "train_trip_booking",
+    "input": "我现在要马上去芜湖出差，时间有点赶，帮我找最合适的一班高铁、二等座、靠过道",
+    "expect": {
+      "scenario_id": "train_trip_booking",
+      "destination.name": "上海虹桥站"
+    },
+    "min_external_actions": 1,
+    "min_execution_plan": 1
+  },
+  {
+    "id": "airport_pickup_multi_stop",
+    "input": "去虹桥机场接我老婆，顺便买个她会喜欢的礼物，安排好一定要准时接机，不要迟到了，然后找个餐厅吃饭，最后去放松一下缓解一下老婆出差的疲惫",
+    "expect": {
+      "scenario_id": "airport_pickup_multi_stop",
+      "destination.name": "虹桥机场"
+    },
+    "min_external_actions": 3,
+    "min_execution_plan": 2
+  },
+  {
+    "id": "complex_day_itinerary",
+    "input": "我早上要先去送孩子上学送个东西，7:40前必须到；老婆要去高铁站，8:30前到；我自己10点还有重要会议；中间帮我找个顺路吃早餐的地方，别绕路；去公司开完会，我要去客户那边，徐汇那边，下午要参加家长会，然后回家收拾一下行李出差3天，晚上还要去机场，有点赶，中间帮我安排好吃午饭的地方，晚饭我就在飞机上吃了",
+    "expect": {
+      "scenario_id": "complex_day_itinerary",
+      "destination.name": "虹桥机场",
+      "constraints.poi_along_route": true
+    },
+    "min_external_actions": 3,
+    "min_execution_plan": 4
   }
 ]

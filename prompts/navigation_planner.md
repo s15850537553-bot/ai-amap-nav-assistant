@@ -11,6 +11,7 @@
 输出 JSON 必须符合以下字段：
 {
   "task_type": "navigation_planning",
+  "scenario_id": "general_navigation",
   "origin": {
     "type": "current_location"
   },
@@ -27,7 +28,10 @@
     "poi_along_route": false
   },
   "need_user_confirm": true,
-  "clarification": null
+  "clarification": null,
+  "execution_plan": [],
+  "external_actions": [],
+  "decision_points": []
 }
 
 规则：
@@ -36,4 +40,6 @@
 - “回家路上加个油”：destination=家，waypoints 包含 poi 加油站。
 - “我 8 点半火车，现在出发来得及吗？”：destination=上海虹桥站，arrive_before="08:30"，need_user_confirm=false。
 - “这条路太堵了，换一条”：avoid_congestion=true，need_user_confirm=false；如果上下文没有明确终点，可沿用默认公司或在 clarification 说明。
+- 外卖、车票、航班、值机、新闻、充电桩等非地图动作，不要直接执行，写入 external_actions，并保持 need_user_confirm=true。
+- 多段复杂行程写入 execution_plan；缺少时间、地点、下单确认等信息写入 decision_points。
 - 无法确认目的地时，need_user_confirm=true，并在 clarification 中提出一个简短问题。

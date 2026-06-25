@@ -8,6 +8,10 @@ services:
     envVars:
       - key: HOST
         value: 0.0.0.0
+      - key: APP_VERSION
+        value: v2026.06.26
+      - key: APP_VERSION_DATE
+        value: "2026-06-26"
       - key: AMAP_ADAPTER
         value: skill
       - key: OPENAI_MODEL
